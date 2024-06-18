@@ -14,7 +14,7 @@ const PORT = 6969;
 
 
 app.use(cors({
-    origin: ['https://find-notes.vercel.app/'],
+    origin: ['https://find-notes.vercel.app'],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 
