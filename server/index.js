@@ -39,7 +39,18 @@ app.get("/", (req, res) => {
 app.use("/auth", authRoutes);
 app.use("/notes", noteRoutes);
 app.use("/files", express.static("files"));
-
+app.options('*', cors({
+    origin: function (origin, callback) {
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Include OPTIONS method
+    credentials: true
+}));
 app.listen(PORT, () => {
     console.log(`Server Running on Port ${PORT}`);
 })
