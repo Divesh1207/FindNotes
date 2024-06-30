@@ -77,7 +77,7 @@ npm start
 
 ### Frontend Setup
 
-1. Navigate to the Frontend directory:
+1. Navigate to  Frontend directory:
 
 ```bash
 
