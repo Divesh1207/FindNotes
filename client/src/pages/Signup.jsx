@@ -42,13 +42,14 @@ const Signup = () => {
           },
         },
       );
-      if (result.data.status === "Success") {
-        toast.success("User successfully created. Redirecting to home...");
+      console.log("Data: ", result);
+      toast.success("User successfully created. Redirecting to home...");
         // Navigate to home page
         navigate("/");
-      } else {
-        toast.error("Signup failed.");
-      } 
+
+    } catch (error) {
+      console.log("Failed to Register User: ", error);
+    }
   };
 
   return (
