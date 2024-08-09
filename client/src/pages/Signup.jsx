@@ -43,23 +43,12 @@ const Signup = () => {
         },
       );
       if (result.data.status === "Success") {
-        toast.success("Signup successful. Logging in...");
-        // Automatically log in the user
-        const loginResult = await axios.post(`${backendUrl}/auth/login`, {
-          userEmail,
-          userPassword,
-        });
-
-        if (loginResult.data.status === "Success") {
-          dispatch(setUserData(loginResult.data));
-          navigate("/");
-        } else {
-          toast.error("Login failed after signup.");
-        }
+        toast.success("User successfully created. Redirecting to home...");
+        // Navigate to home page
+        navigate("/");
       } else {
         toast.error("Signup failed.");
-      }
-    } catch (error) {
+      } catch (error) {
       console.log("Failed to Register User: ", error);
       toast.error("An error occurred during signup.");
     }
