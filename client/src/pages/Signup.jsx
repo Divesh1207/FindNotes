@@ -48,10 +48,7 @@ const Signup = () => {
         navigate("/");
       } else {
         toast.error("Signup failed.");
-      } catch (error) {
-      console.log("Failed to Register User: ", error);
-      toast.error("An error occurred during signup.");
-    }
+      } 
   };
 
   return (
