@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 const Signup = () => {
@@ -12,7 +14,9 @@ const Signup = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
-const navigate = useNavigate();
+ const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const registerUser = async (e) => {
     try {
       e.preventDefault();
@@ -36,14 +40,27 @@ const navigate = useNavigate();
           },
         },
       );
-      console.log("Data: ", result);
-      alert("User Entry Saved in Database");
-        navigate("/");
+      if (result.data.status === "Success") {
+        toast.success("Signup successful. Logging in...");
+        // Automatically log in the user
+        const loginResult = await axios.post(`${backendUrl}/auth/login`, {
+          userEmail,
+          userPassword,
+        });
 
+        if (loginResult.data.status === "Success") {
+          dispatch(setUserData(loginResult.data));
+          navigate("/");
+        } else {
+          toast.error("Login failed after signup.");
+        }
+      } else {
+        toast.error("Signup failed.");
+      }
     } catch (error) {
       console.log("Failed to Register User: ", error);
+      toast.error("An error occurred during signup.");
     }
-
   };
 
   return (
