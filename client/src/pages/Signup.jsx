@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Signup = () => {
@@ -12,7 +12,7 @@ const Signup = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
-
+const navigate = useNavigate();
   const registerUser = async (e) => {
     try {
       e.preventDefault();
@@ -38,6 +38,7 @@ const Signup = () => {
       );
       console.log("Data: ", result);
       alert("User Entry Saved in Database");
+        navigate("/");
 
     } catch (error) {
       console.log("Failed to Register User: ", error);
